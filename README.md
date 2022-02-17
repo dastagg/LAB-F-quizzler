@@ -1,4 +1,4 @@
-# magic_8_ball
+# quizzler
 
 A Flutter project.
 
