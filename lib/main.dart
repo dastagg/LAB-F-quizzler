@@ -33,7 +33,7 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  int questionNumber = 0;
+
 
 
 
@@ -49,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
@@ -69,7 +69,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                  quizBrain.getQuestionAnswer();
                 if (correctAnswer == true) {
                   print('User got it right');
                 } else {
@@ -77,7 +77,7 @@ class _QuizPageState extends State<QuizPage> {
                 }
 
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
 
                 // The user pressed true.
@@ -101,7 +101,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                  quizBrain.getQuestionAnswer();
                 if (correctAnswer == false) {
                   print('User got it right');
                 } else {
@@ -109,7 +109,7 @@ class _QuizPageState extends State<QuizPage> {
                 }
 
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
                 //The user picked false.
               },
