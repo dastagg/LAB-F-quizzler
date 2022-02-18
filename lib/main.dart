@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() => runApp(const Quizzler());
 
@@ -29,21 +30,35 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+
+  List<Icon> scoreKeeper = [];
+  int questionNumber = 0;
+
+
+  List<Question> questionList = [
+    Question(questionText: 'You can lead a cow down stairs but not up stairs.',
+        questionAnswer: false),
+    Question(
+        questionText: 'Approximately one quarter of human bones are in the feet.',
+        questionAnswer: true),
+    Question(questionText: 'A slug\'s blood is green.', questionAnswer: true),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        const Expanded(
+        Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questionList[questionNumber].questionText,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
                 ),
@@ -60,10 +75,21 @@ class _QuizPageState extends State<QuizPage> {
                 backgroundColor: Colors.green,
               ),
               onPressed: () {
-                //The user picked true.
-                },
+                bool correctAnswer = questionList[questionNumber].questionAnswer;
+                if (correctAnswer == true) {
+                  print('User got it right');
+                } else {
+                  print('Use got it wrong');
+                }
+
+                setState(() {
+                  questionNumber ++;
+                });
+
+                // The user pressed true.
+              },
               child: const Text(
-                  'True',
+                'True',
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
@@ -73,13 +99,23 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-          padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 primary: Colors.white,
                 backgroundColor: Colors.red,
               ),
               onPressed: () {
+                bool correctAnswer = questionList[questionNumber].questionAnswer;
+                if (correctAnswer == false) {
+                  print('User got it right');
+                } else {
+                  print('Use got it wrong');
+                }
+
+                setState(() {
+                  questionNumber ++;
+                });
                 //The user picked false.
               },
               child: const Text(
@@ -91,7 +127,9 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        //TODO: Add a Row here as your score keeper
+        Row(
+          children: scoreKeeper,
+        ),
       ],
     );
   }
