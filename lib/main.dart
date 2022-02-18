@@ -45,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
       buttons: [
         DialogButton(
           child: const Text(
-            "COOL",
+            "Close",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onPressed: () => Navigator.pop(context),
